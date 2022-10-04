@@ -35,6 +35,8 @@ model User {
 
   vmUsername String
   vmPassword String
+  
+  // TODO: history attrib
 
   pro Boolean
 }
