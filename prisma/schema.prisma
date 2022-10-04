@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Challenge {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  points    Int
+  authorUser    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  age? Int
+  username String @unique
+  emailVerified Boolean @default(false)
+  // ng substitute for tutorialComplete, can be used for additional things in the future 
+  flags Int
+
+  createdChallenges Challenge[]
+  streak Int
+  solvedChallenges Challenge[]
+    
+  pro Boolean
+}
