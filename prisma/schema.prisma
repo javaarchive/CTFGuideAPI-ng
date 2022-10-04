@@ -17,6 +17,15 @@ model Challenge {
   points    Int
   authorUser    User    @relation(fields: [authorId], references: [id])
   authorId  Int
+  comments Comment[]
+}
+
+model Comment {
+  id      Int     @id @default(autoincrement())
+  comment String
+  // api side generate a username field for compat
+  uid     Int
+  date    @default(now())
 }
 
 model User {
@@ -35,6 +44,8 @@ model User {
 
   vmUsername String
   vmPassword String
+
+  comments Comment[]
   
   // TODO: history attrib
 
